@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Standardized section spacing */
+      section {
+        padding-top: 80px; /* Adjust this value as needed */
+        margin-top: -80px; /* Adjust this value as needed */
+      }
+
+      /* Anchor offset to account for the sticky navbar */
+      :target::before {
+        content: "";
+        display: block;
+        height: 80px; /* Adjust according to your navbar height */
+        margin-top: -80px; /* Adjust according to your navbar height */
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .animate-fade-in {
+        animation: fadeIn 1s ease-out forwards;
+        animation-delay: 0.5s;
+      }
+
+      .animate-slide-up {
+        animation: slideUp 1s ease-out forwards;
+        animation-delay: 0.7s;
+      }
+
+      .animate-fade-in-up {
+        animation: fadeInUp 1s ease-out forwards;
+        animation-delay: 1s;
+      }
+
+      /* Mobile menu transition */
+      .menu-enter-active,
+      .menu-leave-active {
+        transition: opacity 0.3s ease;
+      }
+
+      .menu-enter,
+      .menu-leave-to {
+        opacity: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="py-4 bg-white shadow-lg sticky top-0 z-50">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          <!-- Logo and Title -->
+          <div class="flex items-center">
+            <img
+              src="uploads/photo_2024-08-27_22-54-03-removebg-preview.png"
+              alt="Logo"
+              class="w-24 h-auto"
+            />
+            <span class="ml-4 text-2xl font-bold text-[#0D2A28]"
+              >Fortune Traders</span
+            >
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="sm:hidden">
+            <button id="menu-button" class="text-[#0D2A28] focus:outline-none">
+              <svg
+                class="w-8 h-8"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                ></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Navigation Links for Desktop -->
+          <div class="hidden sm:flex space-x-8">
+            <a
+              href="#home"
+              class="px-5 py-3 text-lg font-medium text-[#0D2A28] hover:bg-[#08311F] hover:text-white rounded-md"
+              >Home</a
+            >
+            <a
+              href="#about-us"
+              class="px-5 py-3 text-lg font-medium text-[#0D2A28] hover:bg-[#08311F] hover:text-white rounded-md"
+              >About Us</a
+            >
+            <a
+              href="products.html"
+              class="px-5 py-3 text-lg font-medium text-[#0D2A28] hover:bg-[#08311F] hover:text-white rounded-md"
+              >Our Products</a
+            >
+            <a
+              href="#contact-us"
+              class="px-5 py-3 text-lg font-medium text-[#0D2A28] hover:bg-[#08311F] hover:text-white rounded-md"
+              >Contact Us</a
+            >
+          </div>
+        </div>
+
+        <!-- Mobile Navigation Links -->
+        <div
+          id="mobile-menu"
+          class="hidden sm:hidden flex flex-col mt-4 space-y-2"
+        >
+          <a
+            href="#home"
+            class="block px-5 py-3 text-lg font-medium text-[#0D2A28] hover:bg-[#08311F] hover:text-white rounded-md"
+            >Home</a
+          >
+          <a
+            href="#about-us"
+            class="block px-5 py-3 text-lg font-medium text-[#0D2A28] hover:bg-[#08311F] hover:text-white rounded-md"
+            >About Us</a
+          >
+          <a
+            href="products.html"
+            class="block px-5 py-3 text-lg font-medium text-[#0D2A28] hover:bg-[#08311F] hover:text-white rounded-md"
+            >Our Products</a
+          >
+          <a
+            href="#contact-us"
+            class="block px-5 py-3 text-lg font-medium text-[#0D2A28] hover:bg-[#08311F] hover:text-white rounded-md"
+            >Contact Us</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- JavaScript for Mobile Menu Toggle -->
+    <script>
+      const menuButton = document.getElementById("menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
+
+    <!-- Hero Section -->
+    <section id="home" class="text-gray-900 body-font bg-gray-100 pt-2 sm:pt-3 pb-10 sm:pb-12 md:pb-16">
+        <div class="container mx-auto flex px-4 sm:px-8 py-8 sm:py-11 md:flex-row flex-col items-center">
+          <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-0 items-center text-center min-h-screen justify-center">
+            <h1 class="title-font sm:text-5xl text-4xl mb-6 font-bold leading-tight text-[#0D2A28] animate-fade-in">
+              Fortune Traders
+            </h1>
+            <h2 class="text-3xl sm:text-4xl text-gray-700 font-semibold mb-6 animate-slide-up">
+              Sustainable Solutions, Quality Products.
+            </h2>
+            <p class="mb-8 leading-relaxed text-gray-600 text-lg font-normal animate-fade-in-up">
+              Empowering businesses with eco-friendly, durable packaging. From
+              non-woven bags to polybags, we deliver quality that meets the highest standards.
+              Join us in making a positive impact on the environment.
+            </p>
+            <div class="flex justify-center animate-bounce-in">
+              <a href="uploads/fortune-traders.pdf"
+                 class="inline-flex text-white bg-[#0D2A28] border-0 py-2 px-6 focus:outline-none hover:bg-[#09302A] hover:scale-105 transform rounded-full text-lg transition duration-300 shadow-lg"
+                 download="Fortune_Traders_Brochure.pdf">
+                Download Brochure
+              </a>
+              <a href="#contact-us"
+                 class="ml-4 inline-flex text-[#0D2A28] bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 hover:scale-105 transform rounded-full text-lg transition duration-300 shadow-lg">
+                Contact Us
+              </a>
+            </div>
+          </div>
+          <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+            <img class="object-cover object-center rounded-lg shadow-xl hover:scale-105 transform transition duration-500 animate-fade-in"
+                 alt="hero" src="uploads/Leonardo_Phoenix_A_visually_appealing_hero_section_image_featu_0-removebg-preview.png" />
+          </div>
+        </div>
+      </section>
+      
+      <!-- About Us Section -->
+      <section id="about-us" class="text-gray-600 body-font bg-gray-100 py-6 sm:py-8 lg:py-10">
+        <div class="container mx-auto px-5 py-8 sm:py-10 lg:py-12">
+          <div class="bg-white shadow-lg rounded-lg p-6 sm:p-10 xl:w-3/4 lg:w-4/5 md:w-full w-full mx-auto text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-xl border border-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="inline-block w-8 h-8 text-[#0D2A28] mb-6 md:mb-8" viewBox="0 0 975.036 975.036">
+              <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"></path>
+            </svg>
+            <p class="leading-relaxed text-lg sm:text-xl text-[#0D2A28] mx-auto max-w-3xl">
+              Incepted in the year 2010, <span class="font-bold text-[#0D2A28]">Fortune Traders</span> is a
+              Wholesaler Trader offering an enormous consignment of Non Woven Bags, Stretch Film Roll, etc.
+            </p>
+            <span class="inline-block h-1 w-10 rounded bg-[#0D2A28] mt-6 md:mt-8 mb-4 md:mb-5"></span>
+            <h2 class="text-[#0D2A28] font-bold title-font tracking-wider text-base sm:text-lg">
+              HUSSAIN BOOTWALA
+            </h2>
+            <p class="text-gray-500 text-sm sm:text-base">CEO</p>
+          </div>
+        </div>
+      </section>
+      
+
+    <!-- Our Products Section -->
+    <section id="our-products" class="text-gray-900 body-font bg-gray-100 py-8">
+      <!-- Reduced padding here -->
+      <div class="container px-5 py-8 mx-auto">
+        <!-- Reduced padding here as well -->
+        <!-- Our Products Heading -->
+        <div class="text-center mb-12">
+          <h1 class="text-4xl font-bold text-[#0D2A28] mb-4">Our Products</h1>
+          <p class="text-gray-600">Explore our premium range of high-quality products</p>
+        </div>
+
+        <!-- Product Grid Container -->
+        <div class="flex flex-wrap -m-4">
+          <!-- E-commerce card 1 -->
+          <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+            <div
+              class="hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 bg-white rounded-lg p-6"
+            >
+              <a class="block relative h-48 rounded overflow-hidden">
+                <img
+                  alt="ecommerce"
+                  class="object-contain object-center w-full h-full block"
+                  src="uploads/500gmRed-removebg-preview.png"
+                />
+              </a>
+              <div class="mt-4">
+                <h3
+                  class="text-[#6b6b6b] text-xs tracking-widest title-font mb-1"
+                >
+                  Non Woven W Cut Bag
+                </h3>
+                <h2 class="text-[#0D2A28] title-font text-lg font-medium">
+                  500gm Red Bag
+                </h2>
+                <p class="mt-1 text-gray-600">₹ 130/Kg</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- E-commerce card 2 -->
+          <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+            <div
+              class="hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 bg-white rounded-lg p-6"
+            >
+              <a class="block relative h-48 rounded overflow-hidden">
+                <img
+                  alt="ecommerce"
+                  class="object-contain object-center w-full h-full block"
+                  src="uploads/2KgRedNonWovenWCutBag.jpeg"
+                />
+              </a>
+              <div class="mt-4">
+                <h3
+                  class="text-[#6b6b6b] text-xs tracking-widest title-font mb-1"
+                >
+                  Non Woven W Cut Bag
+                </h3>
+                <h2 class="text-[#0D2A28] title-font text-lg font-medium">
+                  2Kg Red Bag
+                </h2>
+                <p class="mt-1 text-gray-600">₹ 110/Kg</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- E-commerce card 3 -->
+          <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+            <div
+              class="hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 bg-white rounded-lg p-6"
+            >
+              <a class="block relative h-48 rounded overflow-hidden">
+                <img
+                  alt="ecommerce"
+                  class="object-contain object-center w-full h-full block"
+                  src="uploads/PrintedNonWovenLoopHandleBag.jpeg"
+                />
+              </a>
+              <div class="mt-4">
+                <h3
+                  class="text-[#6b6b6b] text-xs tracking-widest title-font mb-1"
+                >
+                  Printed Non Woven Loop Handle 
+                </h3>
+                <h2 class="text-[#0D2A28] title-font text-lg font-medium">
+                  Printed Bag
+                </h2>
+                <p class="mt-1 text-gray-600">₹ 235/Kg</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- E-commerce card 4 -->
+          <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+            <div
+              class="hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 bg-white rounded-lg p-6"
+            >
+              <a class="block relative h-48 rounded overflow-hidden">
+                <img
+                  alt="ecommerce"
+                  class="object-contain object-center w-full h-full block"
+                  src="uploads/DCutNonWovenBag.jpeg"
+                />
+              </a>
+              <div class="mt-4">
+                <h3
+                  class="text-[#6b6b6b] text-xs tracking-widest title-font mb-1"
+                >
+                  Non Woven Bag
+                </h3>
+                <h2 class="text-[#0D2A28] title-font text-lg font-medium">
+                  D Cut Non Woven Bag
+                </h2>
+                <p class="mt-1 text-gray-600">₹ 140/Kg</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- E-commerce card 5 -->
+          <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+            <div
+              class="hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 bg-white rounded-lg p-6"
+            >
+              <a class="block relative h-48 rounded overflow-hidden">
+                <img
+                  alt="ecommerce"
+                  class="object-contain object-center w-full h-full block"
+                  src="uploads/LLDPEStretchFilmRoll.jpeg"
+                />
+              </a>
+              <div class="mt-4">
+                <h3
+                  class="text-[#6b6b6b] text-xs tracking-widest title-font mb-1"
+                >
+                  Stretch Film Roll
+                </h3>
+                <h2 class="text-[#0D2A28] title-font text-lg font-medium">
+                  LLDPE Stretch Film Roll
+                </h2>
+                <p class="mt-1 text-gray-600">₹ 160/Roll</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- E-commerce card 6 -->
+          <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+            <div
+              class="hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 bg-white rounded-lg p-6"
+            >
+              <a class="block relative h-48 rounded overflow-hidden">
+                <img
+                  alt="ecommerce"
+                  class="object-contain object-center w-full h-full block"
+                  src="uploads/SpunlaceNonwovenFabric.jpeg"
+                />
+              </a>
+              <div class="mt-4">
+                <h3
+                  class="text-[#6b6b6b] text-xs tracking-widest title-font mb-1"
+                >
+                  Nonwoven Fabric
+                </h3>
+                <h2 class="text-[#0D2A28] title-font text-lg font-medium">
+                  Spunlace Nonwoven Fabric
+                </h2>
+                <p class="mt-1 text-gray-600">₹ 136/Kg</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- E-commerce card 7 -->
+          <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+            <div
+              class="hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 bg-white rounded-lg p-6"
+            >
+              <a class="block relative h-48 rounded overflow-hidden">
+                <img
+                  alt="ecommerce"
+                  class="object-contain object-center w-full h-full block"
+                  src="uploads/GoldenMetalizedPaper.jpeg"
+                />
+              </a>
+              <div class="mt-4">
+                <h3
+                  class="text-[#6b6b6b] text-xs tracking-widest title-font mb-1"
+                >
+                  Metallic Paper
+                </h3>
+                <h2 class="text-[#0D2A28] title-font text-lg font-medium">
+                  Golden Metalized Paper
+                </h2>
+                <p class="mt-1 text-gray-600">Get the latest price</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- E-commerce card 8 -->
+          <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+            <div
+              class="hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 bg-white rounded-lg p-6"
+            >
+              <a class="block relative h-48 rounded overflow-hidden">
+                <img
+                  alt="ecommerce"
+                  class="object-contain object-center w-full h-full block"
+                  src="uploads/SilverAndGoldenMetalizedPaper.jpeg"
+                />
+              </a>
+              <div class="mt-4">
+                <h3
+                  class="text-[#6b6b6b] text-xs tracking-widest title-font mb-1"
+                >
+                  Metallic Paper
+                </h3>
+                <h2 class="text-[#0D2A28] title-font text-lg font-medium">
+                  Silver Metalized Paper
+                </h2>
+                <p class="mt-1 text-gray-600">Get the latest price</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Browse All Products Button -->
+        <div class="flex justify-center items-center mt-12">
+          <a
+            href="products.html"
+            class="inline-flex text-white bg-[#0D2A28] border-0 py-3 px-8 focus:outline-none hover:bg-[#09302A] rounded-full text-lg transition-transform transform hover:scale-105 shadow-lg"
+          >
+            Browse All Products
+          </a>
+        </div>
+      </div>
+    </section>
+
+    
+    <!-- Stats Section -->
+    <section id="stats-section" class="text-gray-600 bg-gray-100 body-font">
+      <div class="container px-5 py-24 mx-auto">
+        <!-- Box-like container with white background and shadow -->
+        <div class="bg-white shadow-lg rounded-lg p-10">
+          <div class="flex flex-wrap -m-4 text-center">
+            <!-- Number of Products -->
+            <div class="stat-item p-4 sm:w-1/4 w-1/2">
+              <h2 class="title-font stat-number">10+</h2>
+              <p class="leading-relaxed stat-description">Products</p>
+            </div>
+
+            <!-- Number of Customers -->
+            <div class="stat-item p-4 sm:w-1/4 w-1/2">
+              <h2 class="title-font stat-number">1.5K+</h2>
+              <p class="leading-relaxed stat-description">Customers</p>
+            </div>
+
+            <!-- Years in Business -->
+            <div class="stat-item p-4 sm:w-1/4 w-1/2">
+              <h2 class="title-font stat-number">10+</h2>
+              <p class="leading-relaxed stat-description">Years in Business</p>
+            </div>
+
+            <!-- Number of Places Delivered -->
+            <div class="stat-item p-4 sm:w-1/4 w-1/2">
+              <h2 class="title-font stat-number">20+</h2>
+              <p class="leading-relaxed stat-description">Places Delivered</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      /* Scoping CSS specifically for the stats section to avoid affecting other elements */
+      #stats-section {
+        padding: 4rem 0;
+        background-color: #f3f4f6; /* light gray background */
+      }
+
+      #stats-section .container .bg-white {
+        background-color: #ffffff; /* white background */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow */
+        border-radius: 0.5rem; /* rounded corners */
+        padding: 2.5rem; /* padding */
+      }
+
+      #stats-section .flex {
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        justify-content: space-between; /* Distribute stats evenly */
+      }
+
+      #stats-section .p-4 {
+        padding: 1rem;
+        width: 50%; /* Default width for smaller screens */
+        text-align: center; /* Center text */
+      }
+
+      @media (min-width: 640px) {
+        #stats-section .p-4 {
+          width: 25%; /* Wider boxes on medium and larger screens */
+        }
+      }
+
+      /* Stat number styling */
+      #stats-section .stat-number {
+        font-size: 2.5rem; /* large font size for numbers */
+        font-weight: 700; /* bold font */
+        color: #0d2a28; /* main color */
+      }
+
+      /* Stat description styling */
+      #stats-section .stat-description {
+        font-size: 1.25rem; /* medium font size */
+        color: #6b7280; /* gray color */
+        margin-top: 0.5rem; /* space between number and description */
+      }
+
+      /* Add hover effect */
+      #stats-section .stat-item {
+        transition: transform 0.3s ease-in-out; /* Smooth transition */
+      }
+
+      #stats-section .stat-item:hover {
+        transform: scale(1.1); /* Scale up when hovered */
+        transition: transform 0.3s ease-in-out; /* Ensure smooth animation */
+      }
+    </style>
+
+    <!-- Contact Us Section -->
+    <section
+      id="contact-us"
+      class="text-gray-900 bg-gray-100 body-font relative"
+    >
+      <div class="text-center mb-0 relative mt-0">
+        <div
+          class="inline-block bg-white py-4 px-8 rounded-lg shadow-md border-l-4 border-r-4 border-[#0D2A28] border-opacity-80 transition-transform duration-300 ease-in-out hover:scale-105"
+        >
+          <h1 class="text-2xl font-semibold text-[#0D2A28] tracking-wide">
+            Contact Us
+          </h1>
+        </div>
+        <!-- Left Decorative Border Bar -->
+        <span
+          class="absolute -bottom-2 left-1/4 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-[#0D2A28] to-transparent rounded-full transition-all duration-300 ease-in-out hover:bg-gradient-to-r hover:from-[#0D2A28] hover:to-transparent"
+        ></span>
+        <!-- Right Decorative Border Bar (mirrored) -->
+        <span
+          class="absolute -bottom-2 right-1/4 transform translate-x-1/2 w-20 h-1 bg-gradient-to-l from-[#0D2A28] to-transparent rounded-full transition-all duration-300 ease-in-out hover:bg-gradient-to-l hover:from-[#0D2A28] hover:to-transparent"
+        ></span>
+      </div>
+      <div class="container px-5 py-24 mx-auto flex sm:flex-nowrap flex-wrap">
+        <div
+          class="lg:w-2/3 md:w-1/2 bg-white rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative shadow-lg animate-fadeInUp"
+        >
+          <iframe
+            width="100%"
+            height="100%"
+            title="map"
+            class="absolute inset-0"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            scrolling="no"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d920.1360707033165!2d75.85660362846986!3d22.708002598706848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fd06ee4f6a51%3A0x1b3bb278159aaf96!2s24%2C%20Pagnis%20Paga%2C%20Indore%2C%20Madhya%20Pradesh%20452007!5e0!3m2!1sen!2sin!4v1724782197333!5m2!1sen!2sin"
+          ></iframe>
+          <div
+            class="bg-white relative flex flex-wrap py-6 rounded shadow-md animate-fadeInUp delay-500"
+          >
+            <div class="lg:w-1/2 px-6">
+              <h2
+                class="title-font font-semibold text-gray-900 tracking-widest text-base animate-slideInLeft"
+              >
+                ADDRESS
+              </h2>
+              <p class="mt-1 text-gray-600 animate-slideInLeft delay-300">
+                24/2 Pagnis Paga Alapura Indore(M.P) [452007]
+              </p>
+            </div>
+            <div class="lg:w-1/2 px-6 mt-4 lg:mt-0">
+              <h2
+                class="title-font font-semibold text-gray-900 tracking-widest text-base animate-slideInRight"
+              >
+                PHONE
+              </h2>
+              <p
+                class="leading-relaxed text-gray-600 animate-slideInRight delay-300"
+              >
+                +91 93034 54026
+              </p>
+              <p
+                class="leading-relaxed text-gray-600 animate-slideInRight delay-300"
+              >
+                +91 74898 43194
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="lg:w-1/3 md:w-1/2 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 shadow-lg rounded-lg p-10"
+        >
+          <p
+            class="leading-relaxed mb-5 text-gray-600 animate-fadeInDown delay-200"
+          >
+            We are here to assist you. Fill out the form below and our team will
+            get back to you shortly.
+          </p>
+
+          <form id="contactForm" class="animate-fadeIn delay-300">
+            <div class="relative mb-4">
+              <label for="name" class="leading-7 text-sm text-gray-600"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-[#0D2A28] focus:bg-white focus:ring-2 focus:ring-[#0D2A28] text-base outline-none text-gray-700 py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
+                required
+              />
+            </div>
+            <div class="relative mb-4">
+              <label for="email" class="leading-7 text-sm text-gray-600"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-[#0D2A28] focus:bg-white focus:ring-2 focus:ring-[#0D2A28] text-base outline-none text-gray-700 py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
+                required
+              />
+            </div>
+            <div class="relative mb-4">
+              <label for="message" class="leading-7 text-sm text-gray-600"
+                >Message</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-[#0D2A28] focus:bg-white focus:ring-2 focus:ring-[#0D2A28] h-32 text-base outline-none text-gray-700 py-2 px-4 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="text-white bg-[#0D2A28] border-0 py-2 px-8 focus:outline-none hover:bg-[#09302A] rounded-full text-lg shadow-md transition-transform transform hover:scale-105 duration-300"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const userName = document.getElementById("name").value;
+          const userEmail = document.getElementById("email").value;
+          const message = document.getElementById("message").value;
+
+          const phoneNumber = "7000843815"; // WhatsApp number with country code
+          const whatsappMessage = `Hello, my name is ${userName}. My email is ${userEmail}. Here is my message: ${message}`;
+
+          // Redirect to WhatsApp with the message as a predefined draft
+          const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
+            whatsappMessage
+          )}`;
+          window.open(whatsappUrl, "_blank");
+        });
+    </script>
+
+    <footer class="text-gray-600 body-font">
+      <div
+        class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col"
+      >
+        <!-- Logo and Brand Name -->
+        <a
+          class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
+        >
+          <!-- Custom Logo -->
+          <img
+            src="uploads/photo_2024-08-27_22-54-03-removebg-preview.png"
+            alt="Fortune Traders Logo"
+            class="w-10 h-10"
+          />
+          <span class="ml-3 text-xl">Fortune Traders</span>
+        </a>
+
+        <!-- Company Info -->
+        <p
+          class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4"
+        >
+          © 2024 Fortune Traders — All rights reserved.
+        </p>
+
+        <!-- Contact Info -->
+        <div class="sm:ml-auto sm:mt-0 mt-4 text-sm text-gray-500">
+          <p>
+            Contact:
+            <a href="tel:+919303454026" class="text-gray-900"
+              >+91 93034 54026</a
+            >
+          </p>
+          <p>
+            Email:
+            <a href="mailto:hussainboot1@gmail.com" class="text-gray-900"
+              >hussainboot1@gmail.com</a
+            >
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
